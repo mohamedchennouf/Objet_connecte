@@ -5,7 +5,7 @@
 * Ahmed Fezai, ahmed.fezai@etu.unice.fr
 * Alexis Metge, alexis.metge@etu.unice.fr
 
-#Qu’est que la peluche FAMINI
+# Qu’est que la peluche FAMINI
 
 FAMINI est une peluche capable d’écouter son environnement en se connectant à un réseau d’information tel que
 la météo ou l’heure mais aussi de capter des informations tel que l’air, la température, les mouvements et les bruits
@@ -23,7 +23,8 @@ celle-ci sont ouvertes en Hiver. Camille aimerait savoir si la chambre de Charle
 
 •Camille qui est très occupé aimerait communiquer de temps à autre avec son enfant lorsque celui-ci se trouve
 loin d’elle
-#Actionneeur / Connecteur
+
+# Actionneeur / Connecteur
 
 Grove température 
 Grove qualité d’air 
