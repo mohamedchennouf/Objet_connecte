@@ -1,30 +1,24 @@
-# Baby-phone connecté
+# Peluche connecté
 
 # Groupe
 * Mohamed Chennouf, mohamed.chennouf@etu.unice.fr
 * Ahmed Fezai, ahmed.fezai@etu.unice.fr
 * Alexis Metge, alexis.metge@etu.unice.fr
 
-#Qu’est que le babyphone FAMINI
-FAMINI est un baybyphone capable de communiquer un tas d’informations sur l’état de l’enfant et de la pièce
-dans laquelle se trouve l’enfant. FAMINI est capable d’écouter son environnement et de transmettre la voix et la vidéo
-vers le smartphone des parents. Contrairement aux autres babyphones moins sophistiqués qui limitent votre champ
-de surveillance de bébé à 50 m , en utilisant un babyphone connecté au WiFi domestique , FAMINI n’est pas limité
-par une question de portée. FAMINI vous permet aussi de communiquer avec votre enfant à tout moment, mais aussi
-d’avoir un monitoring sur la température et la qualité de l’air de la pièce dans laquelle se trouve l’enfant . En effet
-ses capteurs peuvent analyser la qualité de l’air que respire votre enfants en temps réel ainsi que la température de
-la pièce . Si des niveaux dangereux sont atteints, il prévient les parents via l’application mobile. Enfin, FAMINI aide
-votre enfant à dormir : Il propose des mélodies récupéré grace à un service Web. L’objet s’intègre agréablement dans
-une chambre d’enfant, sans la troubler.
+#Qu’est que la peluche FAMINI
 
+FAMINI est une capable de communiquer un tas d’informations sur l’état de l’enfant et de la pièce dans laquelle se trouve l’enfant. FAMINI est capable de traiter des informations de son environnement.
+Contrairement aux autres peluches moins sophistiquées qui ne font qu'apporter du bien etre à l'enfant, FAMINI est capable à travers des capteurs d'analyser le comportement de l'enfant et de réagir en fonction de cela. 
+FAMINI par exemple est capable grace à des capteurs de chocs/microphone/caméra de savoir si votre enfant est colérique ou s'il est en manque de force . En effet FAMINI peut analyser l'attitude de l'enfant pendant sa vie active mais aussi pendant sa vie nocturne. FAMINI informe les parents si l'enfant a des troubles du sommeille et est capable de se brancher à des services web / allumer la télévision / lancer une console vidéo / jouer des berceuse/musics suivant le comportement de l'enfant . Famini en plus de communiquer des informations aux parents est capable de traiter des donnés et d'utiliser des services extérieurs . Il est capable d'avoir des informations sur la pièce( air et température et des traités en envoyant des émoticônes de couleur via l'application de monitoring qui lui est associée.. )
 # Scénarios d'utilisation
-Camille, jeune maman, veux garder un oeil sur son fils en bas age tout en continuant ses activités dans la maison. Ayant une grande maison, elle veux également s'éviter des aller-retour inutiles. Le baby-phone connecté lui permet de vaquer à ses occupations tout en sachant que son smartphone garde un oeil attentif sur son bambin et la préviendra dès que ses cris se feront insistants.
-Elle pourra alors obtenir une vidéo en direct de son enfant, lui permettant ainsi de juger si elle à besoin de se déplacer ou si ce n'est qu'un petit réveil intempestif. Elle pourra également essayer de le calmer en lui sussurant des mots doux, ou en lançant une berceuse trouvée directement en ligne. Le son ne sera bien entendu jamais trop fort puisque il sera automatiquement conservé sous un certain seuil.
-Enfin, elle pourra vérifier que l'environnement de son enfant est toujours agréable grâce aux relevés de qualité de l'air réalisés, et elle pourra aérer la chambre dès que nécéssaire.
+Mickael qui a 3 ans est un enfant qui dort très souvent en class , sa mère n'est pas capable de savoir pourquoi il dort en class alors qu'elle le couche à 20h . Famini est capable de mesurer l'activité nocture de l'enfant et d'informé les parents de son activité nocture et suivant cette activité proposer des alternatives tel qu'une berceuse.
 
 #Besoin matérielle : FAMINI
 
-•Caméra : Permet la surveillance de l’enfant en tant réel
+
+•Capteur de chocs : Permet de connaitre la force de l'enfant et de réalisé des traitements sur son comportement
+
+•Capteur de mouvement : Permet d'analyser certain comportement
 
 •Microphones : Permet de recevoir les informations auditives venant de l’enfant
 
@@ -37,6 +31,9 @@ l’application .
 cas contraire via l’application
 
 • Haut-parleur
+
+
+
 
 
 #Pour plus informations lire le FAMINI.pdf qui est bien plus detaillé
