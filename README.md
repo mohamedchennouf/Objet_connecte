@@ -27,10 +27,15 @@ loin d’elle
 # Actionneeur / Connecteur
 
 Grove température 
+
 Grove qualité d’air 
+
 Grove light sensor 
+
 Grove sound sensor 
+
 Grove mouvement 
+
 Grove haut parleur 
 
 
