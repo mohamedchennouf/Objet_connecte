@@ -5,16 +5,21 @@ import time
 # SIG,NC,VCC,GND
 button = 3
 
-SERVER_PORT = 9278
-SERVER_ADDRESS = "localhost"
+SERVER_PORT = 8080
+SERVER_ADDRESS = "192.168.1.165"
 
 def send_data():
     import requests
-    url = 'http://' + SERVER_ADDRESS + ':' + SERVER_PORT + '/button';
+    import json
+    url = 'http://' + SERVER_ADDRESS + ':' + str(SERVER_PORT) + '/button';
     data = {
         'text': 'The super duper button was pressed.'
     }
-    response = requests.post(url, data=json.dumps(data))
+    headers = {
+        'Content-type':'application/json'
+    }
+    response = requests.post(url, json=json.dumps(data), headers=headers)
+    print(response)
 
 if __name__ == "__main__":
     grovepi.pinMode(button, "INPUT")
@@ -24,7 +29,7 @@ if __name__ == "__main__":
             if not button_pressed and grovepi.digitalRead(button):
                 button_pressed = True
                 send_data()
-            elif button_pressed:
+            elif button_pressed and not grovepi.digitalRead(button):
                 button_pressed = False
-        except IOError:
-            print("Error")
+        except IOError as e:
+            print("Error:" + str(e))
