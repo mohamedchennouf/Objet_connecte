@@ -1,5 +1,4 @@
-import grovepi
-import time
+import argparse
 
 # Connect the Grove Button to digital port D3
 # SIG,NC,VCC,GND
@@ -21,7 +20,9 @@ def send_data():
     response = requests.post(url, json=json.dumps(data), headers=headers)
     print(response)
 
-if __name__ == "__main__":
+def loop():
+    import grovepi
+
     grovepi.pinMode(button, "INPUT")
     button_pressed = False
     while True:
@@ -33,3 +34,13 @@ if __name__ == "__main__":
                 button_pressed = False
         except IOError as e:
             print("Error:" + str(e))
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('server_address', type=str, nargs='?', default='localhost', help='The address of the REST server')
+    parser.add_argument('server_port', type=int, nargs='?', default=8080, help='The port of the REST server')
+    args = parser.parse_args()
+    SERVER_ADDRESS = args.server_address
+    SERVER_PORT = args.server_port
+    loop()
+
