@@ -1,39 +1,24 @@
+from REST_server import start_REST_server
 import argparse
-
-# Connect the Grove Button to digital port D3
-# SIG,NC,VCC,GND
-button = 3
+from sensors_actions import *
+from threading import Thread
 
 SERVER_PORT = 8080
 SERVER_ADDRESS = "192.168.1.165"
 
-def send_data():
+def send_data(data):
+    """
+    Send data to the remote server. The data is a python dictionnary that will
+    be translated to json before being sent.
+    """
     import requests
     import json
     url = 'http://' + SERVER_ADDRESS + ':' + str(SERVER_PORT) + '/button';
-    data = {
-        'text': 'The super duper button was pressed.'
-    }
     headers = {
         'Content-type':'application/json'
     }
     response = requests.post(url, json=json.dumps(data), headers=headers)
     print(response)
-
-def loop():
-    import grovepi
-
-    grovepi.pinMode(button, "INPUT")
-    button_pressed = False
-    while True:
-        try:
-            if not button_pressed and grovepi.digitalRead(button):
-                button_pressed = True
-                send_data()
-            elif button_pressed and not grovepi.digitalRead(button):
-                button_pressed = False
-        except IOError as e:
-            print("Error:" + str(e))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -42,5 +27,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     SERVER_ADDRESS = args.server_address
     SERVER_PORT = args.server_port
-    loop()
+
+    init_sensors()
+    polling_thread = Thread(target=poll_sensors, args=[
+                            lambda: send_data({'type': 'button', 'connector':button, 'status':'pressed'}),
+                            lambda: send_data({'type': 'button', 'connector':button, 'status':'released'})])
+    polling_thread.start()
+    start_REST_server()
 

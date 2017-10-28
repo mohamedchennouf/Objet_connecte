@@ -1,4 +1,5 @@
 var restify = require('restify');
+var fetch = require('node-fetch');
 
 const server = restify.createServer({
     name: 'myapp',
@@ -29,18 +30,26 @@ if (process.argv.length > 2)
 if (process.argv.length > 3)
     pi.port = +process.argv[3];
 
-console.log("The ip is on " + pi.addr + ":" + pi.port);
+console.log("Teddy is on " + pi.addr + ":" + pi.port);
 
+// Just forward the request to the object...
 server.post('/light', (req, res, next) => {
-    fetch(pi.addr + ':' + pi.port + '/light', {
+    fetch('http://' + pi.addr + ':' + pi.port + '/light', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        }
-    }).then((res) => {
-        if (res.ok) {
-            console.log("Light success");
-        }
+        },
+        body: JSON.stringify(req.params)
+    }).then((result) => {
+        if (result.ok) {
+            console.log("Light successfuly turned " + req.params.status);
+            res.send();
+        } else
+            res.send(result.status);
+        return next();
+    }).catch((err) => {
+        console.error("An error happened.");
+        console.error(err);
+        res.send(500, err);
     });
-    return next();
 });
