@@ -1,27 +1,25 @@
 var restify = require('restify');
 var fetch = require('node-fetch');
 var bodyParser = require('body-parser');
-const corsMiddleware = require('restify-cors-middleware')
 const server = restify.createServer({
     name: 'myapp',
 
     version: '1.0.0'
 });
 
-const cors = corsMiddleware({
-    preflightMaxAge: 5, //Optional
-    origins: ['http://api.myapp.com', 'http://web.myapp.com'],
-    allowHeaders: ['API-Token'],
-    exposeHeaders: ['API-Token-Expiry']
-});
-
-server.pre(cors.preflight);
-server.use(cors.actual);
 
 server.use(bodyParser.urlencoded({
     extended: true
 }));
 server.use(bodyParser.json());
+
+server.opts(/.*/, (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', req.header('Access-Control-Request-Method'));
+    res.header('Access-Control-Allow-Headers', req.header('Access-Control-Request-Headers'));
+    res.send(200);
+    return next();
+});
 
 server.post('/button', function (req, res, next) {
     console.log("Button pressed");
@@ -48,7 +46,7 @@ console.log("Teddy is on " + pi.addr + ":" + pi.port);
 // Just forward the request to the object...
 server.post('/light', (req, res, next) => {
     console.log(req.params);
-    console.log(req.body.status);
+    console.log(req.body);
 
     fetch('http://' + pi.addr + ':' + pi.port + '/light', {
         method: 'POST',
