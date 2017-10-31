@@ -26,4 +26,4 @@ def start_REST_server():
     You should probably spawn this in a sperate thread, as this function will
     never return.
     """
-    run(app, host='localhost', port=7896, debug=True)
+    run(app, host='0.0.0.0', port=7896, debug=True)

@@ -1,17 +1,26 @@
 var restify = require('restify');
 var fetch = require('node-fetch');
-var bodyParser = require('body-parser')
-
+var bodyParser = require('body-parser');
+const corsMiddleware = require('restify-cors-middleware')
 const server = restify.createServer({
     name: 'myapp',
 
     version: '1.0.0'
 });
 
-server.use(bodyParser.urlencoded({
-  extended: true
-}));
+const cors = corsMiddleware({
+    preflightMaxAge: 5, //Optional
+    origins: ['http://api.myapp.com', 'http://web.myapp.com'],
+    allowHeaders: ['API-Token'],
+    exposeHeaders: ['API-Token-Expiry']
+});
 
+server.pre(cors.preflight);
+server.use(cors.actual);
+
+server.use(bodyParser.urlencoded({
+    extended: true
+}));
 server.use(bodyParser.json());
 
 server.post('/button', function (req, res, next) {
@@ -38,29 +47,18 @@ console.log("Teddy is on " + pi.addr + ":" + pi.port);
 
 // Just forward the request to the object...
 server.post('/light', (req, res, next) => {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+    console.log(req.params);
+    console.log(req.body.status);
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    console.log(req.body);
-    res.send("ok");
-    /*
     fetch('http://' + pi.addr + ':' + pi.port + '/light', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(req.params)
+        body: JSON.stringify(req.body)
     }).then((result) => {
         if (result.ok) {
-            console.log("Light successfuly turned " + req.params.status);
+            console.log("Light successfuly turned " + req.body.status);
             res.send();
         } else
             res.send(result.status);
@@ -69,5 +67,5 @@ server.post('/light', (req, res, next) => {
         console.error("An error happened.");
         console.error(err);
         res.send(500, err);
-    });*/
+    });
 });

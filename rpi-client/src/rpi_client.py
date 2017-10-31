@@ -17,7 +17,8 @@ def send_data(data):
     headers = {
         'Content-type':'application/json'
     }
-    response = requests.post(url, json=json.dumps(data), headers=headers)
+    print(data)
+    response = requests.post(url, json=data, headers=headers)
     print(response)
 
 if __name__ == "__main__":

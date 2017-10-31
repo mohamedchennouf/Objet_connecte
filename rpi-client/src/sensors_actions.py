@@ -1,3 +1,4 @@
+import time
 # Connect the Grove Button to digital port D3
 # SIG,NC,VCC,GND
 # Digital
@@ -21,7 +22,9 @@ def init_sensors():
     grovepi.pinMode(button, "INPUT")
     grovepi.pinMode(led_pin, "OUTPUT")
     time.sleep(1) # Just in case
-    grovepi.chainableRgbLed_init(pin_led, nb_leds)
+    grovepi.chainableRgbLed_init(led_pin, nb_leds)
+    # change color to green
+    grovepi.storeColor(0, 255, 0)
 
 def poll_sensors(onPressed, onReleased):
     """
@@ -58,6 +61,8 @@ def change_light(isOn):
     except ImportError:
         return
     if isOn:
-        grovepi.chainableRgbLed_test(led_pin, nb_leds, 1)
+        # set led 1 to green
+        grovepi.chainableRgbLed_pattern(7, 0, 0)
+        time.sleep(.5)
     else:
         grovepi.chainableRgbLed_test(led_pin, nb_leds, 0)
