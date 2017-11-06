@@ -29,10 +29,11 @@ if __name__ == "__main__":
     SERVER_ADDRESS = args.server_address
     SERVER_PORT = args.server_port
 
-    init_sensors()
-    polling_thread = Thread(target=poll_sensors, args=[
+    p = Peluche()
+
+    polling_thread = Thread(target=p.poll_sensors, args=[
                             lambda: send_data({'type': 'button', 'connector':button, 'status':'pressed'}),
                             lambda: send_data({'type': 'button', 'connector':button, 'status':'released'})])
     polling_thread.start()
-    start_REST_server()
+    start_REST_server(p)
 

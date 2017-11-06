@@ -22,8 +22,7 @@ server.opts(/.*/, (req, res, next) => {
 });
 
 server.post('/button', function (req, res, next) {
-    console.log("Button pressed");
-    res.send(req.params);
+    console.log("Button " + req.body.status);
     return next();
 });
 
