@@ -1,25 +1,6 @@
 from REST_server import start_REST_server
 import argparse
 from sensors_actions import *
-from threading import Thread
-
-SERVER_PORT = 8080
-SERVER_ADDRESS = "192.168.1.165"
-
-def send_data(data):
-    """
-    Send data to the remote server. The data is a python dictionnary that will
-    be translated to json before being sent.
-    """
-    import requests
-    import json
-    url = 'http://' + SERVER_ADDRESS + ':' + str(SERVER_PORT) + '/button';
-    headers = {
-        'Content-type':'application/json'
-    }
-    print(data)
-    response = requests.post(url, json=data, headers=headers)
-    print(response)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process some integers.')
@@ -31,9 +12,5 @@ if __name__ == "__main__":
 
     p = Peluche()
 
-    polling_thread = Thread(target=p.poll_sensors, args=[
-                            lambda: send_data({'type': 'button', 'connector':button, 'status':'pressed'}),
-                            lambda: send_data({'type': 'button', 'connector':button, 'status':'released'})])
-    polling_thread.start()
     start_REST_server(p)
 

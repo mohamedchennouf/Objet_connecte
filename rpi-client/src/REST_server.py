@@ -1,17 +1,19 @@
 from bottle import Bottle
 from bottle import request
 from bottle import run
+import flask
 import json
 from sensors_actions import *
-app = Bottle()
+import time
+app = flask.Flask(__name__)
 
 
 
-@app.get('/light')
+@app.route('/light', methods=['GET'])
 def get_light():
     return json.dumps({'status':'ON'})
 
-@app.post('/light')
+@app.route('/light', methods=['POST'])
 def post_light():
     status = request.json.get("status")
     if status == 'ON':
@@ -22,6 +24,31 @@ def post_light():
         peluche.change_light(False)
     return #json.dumps({'status':status})
 
+# https://stackoverflow.com/questions/12232304/how-to-implement-server-push-in-flask-framework
+def accelerometer_stream():
+    global peluche
+    while True:
+        tmp = peluche.is_button_pressed()
+        print("Peluche accelerometer status {}".format(tmp))
+        yield "data: {}\n\n".format(tmp)
+        time.sleep(1)
+
+@app.route('/accelerometer')
+def accelerometer():
+    return flask.Response(accelerometer_stream(), mimetype="text/event-stream")
+
+def temperature_stream():
+    global peluche
+    while True:
+        tmp = peluche.get_temperature()
+        print("Peluche temperature: {}".format(tmp))
+        yield "data: {}\n\n".format(tmp)
+        time.sleep(1)
+
+@app.route('/temperature')
+def temperature():
+    return flask.Response(temperature_stream(), mimetype="text/event-stream")
+
 def start_REST_server(_peluche):
     """
     Start the REST server.
@@ -30,4 +57,4 @@ def start_REST_server(_peluche):
     """
     global peluche
     peluche = _peluche
-    run(app, host='0.0.0.0', port=7896, debug=True)
+    app.run(host='0.0.0.0', port=7896, debug=True, threaded=True)

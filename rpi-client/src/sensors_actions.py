@@ -11,6 +11,9 @@ class Peluche:
             return
         import time
 
+        # Analog ports
+        self.analog_temperature = 0
+
         # Digital ports
         self.button_pin = 3
         self.led_pin = 7
@@ -32,6 +35,15 @@ class Peluche:
         except ImportError:
             return
         return grovepi.digitalRead(self.button_pin)
+
+    def get_temperature(self):
+        """Return True if the button is pressed, False otherwise"""
+        try:
+            import grovepi
+        except ImportError:
+            return
+        # On pin A0
+        return grovepi.temp(self.analog_temperature, '1.2')
 
     def poll_sensors(self, onPressed, onReleased):
         """
