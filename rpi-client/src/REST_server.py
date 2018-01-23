@@ -27,7 +27,7 @@ def accelerometer_stream_():
     while True:
         tmp = peluche.get_accelerometer()
         print("Peluche accelerometer status {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
 
 @app.route('/accelerometer-stream')
@@ -43,7 +43,7 @@ def temperature_stream_():
     while True:
         tmp = peluche.get_temperature()
         print("Peluche temperature: {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
 
 @app.route('/temperature-stream')
@@ -52,14 +52,14 @@ def temperature_stream():
 
 @app.route('/temperature')
 def temperature():
-    return "data: {}\n\n".format(peluche.get_temperature())
+    return "{}\n\n".format(peluche.get_temperature())
 
 def air_quality_stream_():
     global peluche
     while True:
         tmp = peluche.get_air_quality()
         print("Peluche air quality: {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
 
 @app.route('/air-quality-stream')
@@ -68,7 +68,7 @@ def air_quality_stream():
 
 @app.route('/air-quality')
 def air_quality():
-    return "data: {}\n\n".format(peluche.get_air_quality())
+    return "{}\n\n".format(peluche.get_air_quality())
 
 def start_REST_server(_peluche):
     """
