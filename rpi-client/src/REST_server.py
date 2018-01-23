@@ -1,4 +1,5 @@
 import flask
+from flask import request
 import json
 from sensors_actions import *
 import time
@@ -18,50 +19,62 @@ def post_light():
     else:
         print("Switching the light off.")
         peluche.change_light(False)
-    return #json.dumps({'status':status})
+    return ('', 204) #json.dumps({'status':status})
 
 @app.route('/berceuse', methods=['POST'])
 def post_berceuse():
     api = request.json.get("apiBerceuse")
     print(api)
-    return #api
+    return ('', 204)#api
 
 # https://stackoverflow.com/questions/12232304/how-to-implement-server-push-in-flask-framework
-def accelerometer_stream():
+def accelerometer_stream_():
     global peluche
     while True:
         tmp = peluche.get_accelerometer()
         print("Peluche accelerometer status {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
+
+@app.route('/accelerometer-stream')
+def accelerometer_stream():
+    return flask.Response(accelerometer_stream_(), mimetype="text/event-stream")
 
 @app.route('/accelerometer')
 def accelerometer():
-    return flask.Response(accelerometer_stream(), mimetype="text/event-stream")
+    return "{}\n\n".format(peluche.get_accelerometer())
 
-def temperature_stream():
+def temperature_stream_():
     global peluche
     while True:
         tmp = peluche.get_temperature()
         print("Peluche temperature: {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
+
+@app.route('/temperature-stream')
+def temperature_stream():
+    return flask.Response(temperature_stream_(), mimetype="text/event-stream")
 
 @app.route('/temperature')
 def temperature():
-    return flask.Response(temperature_stream(), mimetype="text/event-stream")
+    return "{}\n\n".format(peluche.get_temperature())
 
-def air_quality_stream():
+def air_quality_stream_():
     global peluche
     while True:
         tmp = peluche.get_air_quality()
         print("Peluche air quality: {}".format(tmp))
-        yield "data: {}\n\n".format(tmp)
+        yield "{}\n\n".format(tmp)
         time.sleep(1)
+
+@app.route('/air-quality-stream')
+def air_quality_stream():
+    return flask.Response(air_quality_stream_(), mimetype="text/event-stream")
 
 @app.route('/air-quality')
 def air_quality():
-    return flask.Response(air_quality_stream(), mimetype="text/event-stream")
+    return "{}\n\n".format(peluche.get_air_quality())
 
 def start_REST_server(_peluche):
     """
