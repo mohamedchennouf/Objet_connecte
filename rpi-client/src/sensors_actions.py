@@ -23,7 +23,6 @@ class Peluche:
         self.nb_leds = 1
         self.led_is_on = False
 
-        grovepi.pinMode(self.button_pin, "INPUT")
         grovepi.pinMode(self.led_pin, "OUTPUT")
         grovepi.pinMode(self.air_sensor, "INPUT")
         time.sleep(1) # Just in case
