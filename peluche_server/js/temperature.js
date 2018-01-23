@@ -8,7 +8,7 @@ function myTemperature() {
     http.send(null);
 
     if (http.status === 200) {
-        console.log("La temperature s: %s", http.responseText);
+        console.log("La temperature : %s", http.responseText);
         data = http.responseText;
     } else {
         console.log("Status de la réponse: %d (%s)", http.status, http.statusText);
