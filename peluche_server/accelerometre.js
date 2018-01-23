@@ -1,8 +1,9 @@
 var data = "no data to display";
 
 function myAccelerometre() {
+    console.log('toto');
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.158:9070/accelerometer";
+    var url = "http://192.168.1.158:7896/accelerometer";
 
     http.open('GET', url, false);
     http.send(null);

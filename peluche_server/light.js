@@ -4,13 +4,13 @@ function myLight() {
     if (status == "OFF")
         status = "ON";
     else
-        status = "OFF"
+        status = "OFF";
     /*$.post( "http://localhost:9070/light", function( data ) {
      //As soon as the browser finished downloading, this function is called.
      $('#demo').html(data);
      });*/
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.158:9070/light";
+    var url = "http://192.168.1.158:7896/light";
 
     var params = JSON.stringify({ status: status });
     http.open("POST", url, true);

@@ -3,7 +3,7 @@ var data = "no data to display";
 function myTemperature() {
     console.log('toto2');
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.158:9070/temperature";
+    var url = "http://192.168.1.158:7896/temperature";
 
     http.open('GET', url, false);
     http.send(null);
