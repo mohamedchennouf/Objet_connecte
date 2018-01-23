@@ -1,12 +1,8 @@
-from bottle import Bottle
-from bottle import request
-from bottle import run
 import flask
 import json
 from sensors_actions import *
 import time
 app = flask.Flask(__name__)
-
 
 
 @app.route('/light', methods=['GET'])
@@ -28,7 +24,7 @@ def post_light():
 def accelerometer_stream():
     global peluche
     while True:
-        tmp = peluche.is_button_pressed()
+        tmp = peluche.get_accelerometer()
         print("Peluche accelerometer status {}".format(tmp))
         yield "data: {}\n\n".format(tmp)
         time.sleep(1)
@@ -48,6 +44,18 @@ def temperature_stream():
 @app.route('/temperature')
 def temperature():
     return flask.Response(temperature_stream(), mimetype="text/event-stream")
+
+def air_quality_stream():
+    global peluche
+    while True:
+        tmp = peluche.get_air_quality()
+        print("Peluche air quality: {}".format(tmp))
+        yield "data: {}\n\n".format(tmp)
+        time.sleep(1)
+
+@app.route('/air-quality')
+def air_quality():
+    return flask.Response(air_quality_stream(), mimetype="text/event-stream")
 
 def start_REST_server(_peluche):
     """
