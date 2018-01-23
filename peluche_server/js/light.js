@@ -19,10 +19,11 @@ function myLight() {
     http.setRequestHeader("Content-type", "application/json");
 
     http.onreadystatechange = function () {//Call a function when the state changes.
-        if (http.readyState == 4 && http.status == 200) {
-            console.log(http.responseText);
+       document.getElementById("log").innerHTML = status;
+        if (http.readyState == XMLHttpRequest.DONE && http.status == 200) {
+            console.log(status);
         }
-    }
+    };
 
     http.send(JSON.stringify({ status: status }));
 }

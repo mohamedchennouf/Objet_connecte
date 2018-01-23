@@ -10,6 +10,7 @@ function myAccelerometre() {
     if (http.status === 200) {
         console.log("La position est  : %s", http.responseText);
         data = http.responseText;
+        document.getElementById("log").innerHTML = data;
     } else {
         console.log("Status de la réponse: %d (%s)", http.status, http.statusText);
     }
