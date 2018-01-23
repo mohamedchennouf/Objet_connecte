@@ -1,3 +1,5 @@
+from adxl345 import ADXL345
+
 class Peluche:
     def __init__(self):
         """
@@ -13,9 +15,9 @@ class Peluche:
 
         # Analog ports
         self.analog_temperature = 0
+        self.air_sensor = 1
 
         # Digital ports
-        self.button_pin = 3
         self.led_pin = 7
 
         self.nb_leds = 1
@@ -23,27 +25,37 @@ class Peluche:
 
         grovepi.pinMode(self.button_pin, "INPUT")
         grovepi.pinMode(self.led_pin, "OUTPUT")
+        grovepi.pinMode(self.air_sensor, "INPUT")
         time.sleep(1) # Just in case
         grovepi.chainableRgbLed_init(self.led_pin, self.nb_leds)
         # change color to green
         grovepi.storeColor(0, 255, 0)
 
-    def is_button_pressed(self):
-        """Return True if the button is pressed, False otherwise"""
-        try:
-            import grovepi
-        except ImportError:
-            return
-        return grovepi.digitalRead(self.button_pin)
-
     def get_temperature(self):
-        """Return True if the button is pressed, False otherwise"""
+        """Return the temperature"""
         try:
             import grovepi
         except ImportError:
             return
         # On pin A0
         return grovepi.temp(self.analog_temperature, '1.2')
+
+    def get_accelerometer(self):
+        """Return the current acceleration"""
+        try:
+            import grovepi
+        except ImportError:
+            return
+        adxl = ADXL345()
+        return adxl.getAxes(True)
+
+    def get_air_quality(self):
+        """Return the current acceleration"""
+        try:
+            import grovepi
+        except ImportError:
+            return 0
+        return grovepi.analogRead(self.air_sensor)
 
     def poll_sensors(self, onPressed, onReleased):
         """
