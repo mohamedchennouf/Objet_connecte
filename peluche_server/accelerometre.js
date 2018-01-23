@@ -9,7 +9,7 @@ function myAccelerometre() {
     http.send(null);
 
     if (http.status === 200) {
-        console.log("Réponse reçue: %s", http.responseText);
+        console.log("La qualite dair est : %s", http.responseText);
         data = http.responseText;
     } else {
         console.log("Status de la réponse: %d (%s)", http.status, http.statusText);
