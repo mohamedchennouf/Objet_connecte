@@ -20,6 +20,12 @@ def post_light():
         peluche.change_light(False)
     return #json.dumps({'status':status})
 
+@app.route('/berceuse', methods=['POST'])
+def post_berceuse():
+    api = request.json.get("apiBerceuse")
+    print(api)
+    return #api
+
 # https://stackoverflow.com/questions/12232304/how-to-implement-server-push-in-flask-framework
 def accelerometer_stream():
     global peluche
