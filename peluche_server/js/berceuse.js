@@ -1,7 +1,7 @@
 
 
 
-function myBerceuse() {
+function PostBerceuse() {
    
     var http = new XMLHttpRequest();
     var url = "http://192.168.1.165:7896/berceuse";
@@ -20,6 +20,19 @@ function myBerceuse() {
     };
 
     http.send(params);
+}
+
+
+function RunBerceuse(time){
+        if(time.hour===d.getHours() && time.minutes===d.getMinutes() && d.getSeconds()===0){
+             document.getElementById("infoRunBerceuse").innerHTML = 'La berceuse est lance';
+            PostBerceuse();
+        }else if(time.hour===d.getHours() && time.minutes>=d.getMinutes() && time.minutes < d.getMinutes() + 5 ){
+            document.getElementById("infoRunBerceuse").innerHTML = 'La berceuse est lance';
+        }
+        else{
+            document.getElementById("infoRunBerceuse").innerHTML = "La berceuse se lancera a "+time.hour +":"+time.minutes;
+        }
 }
 
 

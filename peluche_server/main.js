@@ -10,6 +10,7 @@ function runAnimationCars() {
 function mainloop(){
     displayTime();
     AllumeVeilleuse({hour:20 ,minutes:30},1);
+    RunBerceuse({hour:20 ,minutes:35});
     // drawTemperature();
     //drawAccelerometer();
 }

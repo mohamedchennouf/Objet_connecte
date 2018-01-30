@@ -1,5 +1,5 @@
 
-function myAirQuality() {
+function GetAirQuality() {
     var http = new XMLHttpRequest();
     var url = "http://192.168.1.165:7896/air-quality";
 
