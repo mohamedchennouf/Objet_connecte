@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <script src="js/accelerometre.js" type="text/javascript"></script>
-    <script src="js/temperature.js" type="text/javascript"></script>
-    <script src="js/air-quality.js" type="text/javascript"></script>
-    <script src="js/light.js" type="text/javascript"></script>
-    <script src="js/berceuse.js" type="text/javascript"></script>
-
-    <style type="text/css">
-        .row {
-            padding-top: 1.5em;
-        }
-    </style>
-
-    <title>App puluche</title>
-
-</head>
-
-
 <body>
     <div class="container">
 
@@ -30,21 +12,82 @@
             </div>
         </div>
 
+        <div id="buttonRequest" class="title">Request Button</div>
         <div class="row">
-            <button onclick="myLight()">Changes the light</button>
-            <button onclick="myTemperature()">Temperature</button>
-            <button onclick="myAccelerometre()">Accelerometre</button>
+            <button onclick="PostLight()">Changes the light</button>
+            <button onclick="GetTemperature()">Temperature</button>
+            <button onclick="GetAccelerometre()">Accelerometre</button>
             <button onclick="myAirQuality()">Air-Quality</button>
             <button onclick="myBerceuse()">Run Berceuse</button>
         </div>
+        <br>
 
-        <div class="row">
-            <div class="span6 offset1">
-                <div id="log">Nothing to show yet</div>
+
+        <div id="displayData" class="title">Diplay Infomation</div><br>
+
+
+            <div>
+                <span>Time: </span>
+                <span id="time">Nothing to show yet</span>
             </div>
+
+            <div>
+                <span>State Veilleuse: </span>
+                <span id="infoVeilleuse">Nothing to show yet</span>
+            </div>
+
+            <div>
+                <span>Temperature: </span>
+                <span id="infoTemperature">Nothing to show yet</span>
+                <img id="image" src="./image/froid.png" width="40" height="40">
+            </div>
+
+            <div>
+                <span>Value Accelerometer: </span>
+                <span id="infoAccelerometre">Nothing to show yet</span>
+            </div>
+
+            <div>
+                <span>Air-Quality: </span>
+                <span id="infoAir">Nothing to show yet</span>
+            </div>
+
+            <div>
+                <span>Name Berceuse: </span>
+                <span id="infoNameBerceuse">Nothing to show yet</span>
+            </div>
+
+            <div>
+                <span>Berceuse is Running: </span>
+                <span id="infoRunBerceuse">Nothing to show yet</span>
+            </div>
+
         </div>
 
-    </div>
 </body>
+
+<head>
+    <script src="js/accelerometre.js" type="text/javascript"></script>
+    <script src="js/temperature.js" type="text/javascript"></script>
+    <script src="js/air-quality.js" type="text/javascript"></script>
+    <script src="js/light.js" type="text/javascript"></script>
+    <script src="js/berceuse.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .row {
+            padding-top: 1.5em;
+        }
+
+        .title {
+            color: red;
+        }
+    </style>
+
+    <title>App puluche</title>
+
+</head>
+
+
 
 </html>

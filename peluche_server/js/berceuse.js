@@ -4,7 +4,7 @@
 function myBerceuse() {
    
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.158:7896/berceuse";
+    var url = "http://192.168.1.165:7896/berceuse";
 
     var params = JSON.stringify({ apiBerceuse : 'http://www.brainybetty.com/FacebookFans/Feb112010/cello.wav' });
     http.open("POST", url, true);
