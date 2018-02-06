@@ -2,7 +2,7 @@ var dataAccelerometer = null;
 
 function GetAccelerometre() {
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.165:7896/accelerometer";
+    var url = "http://"+ip+":"+port+"/accelerometer";
 
     http.open('GET', url, false);
     http.send(null);
@@ -18,7 +18,7 @@ function GetAccelerometre() {
 }
 
 
-fetch('http://192.168.1.165:7896/accelerometer-stream').then(msg=>{
+fetch("http://"+ip+":"+port+"/accelerometer-stream").then(msg=>{
     var reader = msg.body.getReader();
     var readFunc = tmp=>{
         var string = new TextDecoder("utf-8").decode(tmp.value);

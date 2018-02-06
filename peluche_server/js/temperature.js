@@ -1,9 +1,12 @@
+//import fetch from 'node-fetch';
+var ip = '192.168.1.158';
+var port = '7896';
 var stateTemp = null;
 var mytemperature = null;
 
 function GetTemperature() {
     var http = new XMLHttpRequest();
-    var url = "http://192.168.1.165:7896/temperature";
+    var url = "http://"+ip+":"+port+"/temperature";
 
     http.open('GET', url, false);
     http.send(null);
@@ -12,6 +15,7 @@ function GetTemperature() {
         console.log("La temperature : %s", http.responseText);
         data = http.responseText;
         document.getElementById("infoTemperature").innerHTML = data;
+        drawTemperature(data);
     } else {
         console.log("Status de la réponse: %d (%s)", http.status, http.statusText);
     }
@@ -46,7 +50,7 @@ function drawTemperature(value) {
 }
 
 
-fetch('http://192.168.1.165:7896/temperature-stream').then(msg=>{
+fetch("http://"+ip+":"+port+"/temperature-stream").then(msg=>{
     var reader = msg.body.getReader();
     var readFunc = tmp=>{
         var string = new TextDecoder("utf-8").decode(tmp.value);

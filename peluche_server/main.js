@@ -1,4 +1,8 @@
-var running = null;
+
+
+
+var ip = '192.168.1.158';
+var port = '7896';
 
 
 
@@ -11,10 +15,7 @@ function mainloop(){
     displayTime();
     AllumeVeilleuse({hour:20 ,minutes:30},1);
     RunBerceuse({hour:20 ,minutes:35});
-    // drawTemperature();
-    //drawAccelerometer();
 }
-
 
 
 runAnimationCars();
