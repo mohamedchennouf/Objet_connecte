@@ -99,8 +99,12 @@ class Peluche:
             import grovepi
         except ImportError:
             return
+        if isOn and self.led_is_on:
+            return
+        if not isOn and not self.led_is_on:
+            return
         if isOn:
-            grovepi.chainableRgbLed_pattern(self.led_pin, 0, 0)
+            grovepi.chainableRgbLed_test(self.led_pin, self.nb_leds, 1)
             self.led_is_on = True
         else:
             grovepi.chainableRgbLed_test(self.led_pin, self.nb_leds, 0)
