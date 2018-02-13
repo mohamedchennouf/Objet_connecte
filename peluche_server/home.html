@@ -1,16 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="span4 offset 3">
+                <center>
+                    <h2 class="title">PELUCHE APP</h2>
+                </center>
+            </div>
+        </div>
+
+        <div id="buttonRequest" class="title">Request Button</div>
+        <div class="row">
+            <button onclick="PostLight()">Changes the light</button>
+            <button onclick="GetTemperature()">Temperature</button>
+            <button onclick="GetAccelerometre()">Accelerometre</button>
+            <button onclick="GetAirQuality()">Air-Quality</button>
+            <button onclick="PostBerceuse()">Run Berceuse</button>
+        </div>
+        <br>
+
+
+        <div id="displayData" class="title">Display Infomation</div>
+        <br>
+
+
+        <div>
+            <span>Time: </span>
+            <span id="time">Nothing to show yet</span>
+        </div>
+
+
+        <div>
+            <label>Changer l'heure de la veilleuse :</label>
+            <input type="text" id="timeV" name="timeV">
+        </div>
+        <div>
+            <button onclick="changerVeilleuse()">Changer Veilleuse</button>
+        </div>
+
+
+        <div>
+            <span>State Veilleuse: </span>
+            <span id="infoVeilleuse">Nothing to show yet</span>
+        </div>
+
+        <div>
+            <span>Temperature: </span>
+            <span id="infoTemperature">Nothing to show yet</span>
+            <img id="image" src="./image/froid.png" width="40" height="40">
+        </div>
+
+        <div>
+            <span>Value Accelerometer: </span>
+            <span id="infoAccelerometre">Nothing to show yet</span>
+        </div>
+
+        <div>
+            <span>Air-Quality: </span>
+            <span id="infoAir">Nothing to show yet</span>
+        </div>
+
+
+        <div>
+            <label>Changer l'heure de la berceuse :</label>
+            <input type="text" id="timeB" name="timeB">
+        </div>
+
+        <select>
+            <option value="Berceuse1">Berceuse1</option>
+            <option value="Berceuse2">Berceuse2</option>
+            <option value="Berceuse3">Berceuse3</option>
+            <option value="Berceuse4">Berceuse4</option>
+        </select>
+
+        <div>
+            <button onclick="changerBerceuse()">Changer Berceuse</button>
+        </div>
+
+
+        <div>
+            <span>Name Berceuse: </span>
+            <span id="infoNameBerceuse">Nothing to show yet</span>
+        </div>
+
+        <div>
+            <span>Berceuse is Running: </span>
+            <span id="infoRunBerceuse">Nothing to show yet</span>
+        </div>
+
+        <div>
+            <span>Intensiter Bruit: </span>
+            <span id="infoBruit">Nothing to show yet</span>
+        </div>
+
+    </div>
+
+</body>
+
 <head>
-    <script src="js/accelerometre.js" type="text/javascript"></script>
-    <script src="js/temperature.js" type="text/javascript"></script>
-    <script src="js/air-quality.js" type="text/javascript"></script>
     <script src="js/light.js" type="text/javascript"></script>
+    <script src="js/temperature.js" type="text/javascript"></script>
+    <script src="js/accelerometre.js" type="text/javascript"></script>
+    <script src="js/air-quality.js" type="text/javascript"></script>
     <script src="js/berceuse.js" type="text/javascript"></script>
+    <script src="js/bruit.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
 
     <style type="text/css">
         .row {
             padding-top: 1.5em;
+        }
+
+        .container {}
+
+        body {
+            background-color: lightblue;
+        }
+
+        .title {
+            color: red;
         }
     </style>
 
@@ -19,32 +130,5 @@
 </head>
 
 
-<body>
-    <div class="container">
-
-        <div class="row">
-            <div class="span4 offset 3">
-                <center>
-                    <h2>PELUCHE APP</h2>
-                </center>
-            </div>
-        </div>
-
-        <div class="row">
-            <button onclick="myLight()">Changes the light</button>
-            <button onclick="myTemperature()">Temperature</button>
-            <button onclick="myAccelerometre()">Accelerometre</button>
-            <button onclick="myAirQuality()">Air-Quality</button>
-            <button onclick="myBerceuse()">Run Berceuse</button>
-        </div>
-
-        <div class="row">
-            <div class="span6 offset1">
-                <div id="log">Nothing to show yet</div>
-            </div>
-        </div>
-
-    </div>
-</body>
 
 </html>
