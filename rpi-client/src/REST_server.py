@@ -60,6 +60,22 @@ def temperature_stream():
 def temperature():
     return "{}\n\n".format(peluche.get_temperature())
 
+def sound_level_stream_():
+    global peluche
+    while True:
+        tmp = peluche.get_sound_level()
+        print("Peluche sound level: {}".format(tmp))
+        yield "{}\n\n".format(tmp)
+        time.sleep(1)
+
+@app.route('/sound-level-stream')
+def sound_level_stream():
+    return flask.Response(sound_level_stream_(), mimetype="text/event-stream")
+
+@app.route('/sound-level')
+def sound_level():
+    return "{}\n\n".format(peluche.get_temperature())
+
 def air_quality_stream_():
     global peluche
     while True:
@@ -75,6 +91,41 @@ def air_quality_stream():
 @app.route('/air-quality')
 def air_quality():
     return "{}\n\n".format(peluche.get_air_quality())
+
+@app.route('/play-sound', methods=['POST'])
+def play_wav():
+    try:
+        import pyaudio
+    except ImportError:
+        print("Failed to import PyAudio, can't play sound.")
+        return ("Missing library to play sound.", 500)
+
+    from urllib import urlopen
+
+    # https://stackoverflow.com/questions/38171169/how-to-play-mp3-from-url
+    srate = 44100
+    if "rate" in request.get_json():
+        srate = request.get_json()["rate"]
+
+    pyaud = pyaudio.PyAudio()
+    stream = pyaud.open(format=pyaud.get_format_from_width(1),
+                        channels=1,
+                        rate=srate,
+                        output=True);
+
+    #url = "http://www.audiocheck.net/download.php?filename=Audio/audiocheck.net_hdchirp_88k_-3dBFS_lin.wav"
+    url = request.get_json()["url"]
+    u = urlopen(url)
+
+    data = u.read(8192)
+
+    while data:
+        stream.write(data)
+        data = u.read(8192)
+    #    print("data")
+    #    print(request.data)
+    #    print("data")
+    return ('', 200)
 
 def start_REST_server(_peluche):
     """

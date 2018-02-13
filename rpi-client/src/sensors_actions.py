@@ -1,5 +1,3 @@
-from adxl345 import ADXL345
-
 class Peluche:
     def __init__(self):
         """
@@ -16,6 +14,7 @@ class Peluche:
         # Analog ports
         self.analog_temperature = 0
         self.air_sensor = 1
+        self.sound_sensor = 2
 
         # Digital ports
         self.led_pin = 7
@@ -35,7 +34,7 @@ class Peluche:
         try:
             import grovepi
         except ImportError:
-            return
+            return 0
         # On pin A0
         return grovepi.temp(self.analog_temperature, '1.2')
 
@@ -43,18 +42,27 @@ class Peluche:
         """Return the current acceleration"""
         try:
             import grovepi
+            from adxl345 import ADXL345
         except ImportError:
-            return
+            return '{"x":0,"y":0,"z":0}'
         adxl = ADXL345()
         return adxl.getAxes(True)
 
     def get_air_quality(self):
-        """Return the current acceleration"""
+        """Return the current air quality"""
+        try:
+            import grovepi
+        except ImportError:
+            return 1
+        return grovepi.analogRead(self.air_sensor)
+
+    def get_sound_level(self):
+        """Return the current sound level"""
         try:
             import grovepi
         except ImportError:
             return 0
-        return grovepi.analogRead(self.air_sensor)
+        return grovepi.analogRead(self.sound_sensor)
 
     def poll_sensors(self, onPressed, onReleased):
         """
