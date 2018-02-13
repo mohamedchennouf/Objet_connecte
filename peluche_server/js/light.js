@@ -56,4 +56,6 @@ function AllumeVeilleuse(time,duration){
      }else{
          document.getElementById("infoVeilleuse").innerHTML = "La veilleuse s'allumera a "+time.hour +":"+time.minutes;
      }
-}
+    }
+
+    module.exports ={PostLight}
