@@ -1,3 +1,5 @@
+var ip = '192.168.1.158';
+var port = '7896';
 
 function GetAirQuality() {
     var http = new XMLHttpRequest();

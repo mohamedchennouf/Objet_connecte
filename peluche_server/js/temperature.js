@@ -1,8 +1,7 @@
-//import fetch from 'node-fetch';
-var ip = '192.168.1.158';
-var port = '7896';
 var stateTemp = null;
 var mytemperature = null;
+var ip = '192.168.1.158';
+var port = '7896';
 
 function GetTemperature() {
     var http = new XMLHttpRequest();

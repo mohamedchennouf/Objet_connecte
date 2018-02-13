@@ -53,8 +53,14 @@ app.get('/js/accelerometre.js', function(req, res) {
      res.sendFile('C:/Users/chennouf/Desktop/objet_connecte/Objet_connecte/peluche_server/js/accelerometre.js');
  });
 
+app.get('/js/bruit.js', function(req, res) {
+     res.sendFile('C:/Users/chennouf/Desktop/objet_connecte/Objet_connecte/peluche_server/js/bruit.js');
+ });
+
 
  app.listen(8080); 
+
+console.log("le serveur est lance au port 8080");
 
 
 

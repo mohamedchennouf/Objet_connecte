@@ -1,4 +1,6 @@
 var dataAccelerometer = null;
+var ip = '192.168.1.158';
+var port = '7896';
 
 function GetAccelerometre() {
     var http = new XMLHttpRequest();
