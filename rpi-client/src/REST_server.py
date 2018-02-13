@@ -21,12 +21,6 @@ def post_light():
         peluche.change_light(False)
     return ('', 204) #json.dumps({'status':status})
 
-@app.route('/berceuse', methods=['POST'])
-def post_berceuse():
-    api = request.json.get("apiBerceuse")
-    print(api)
-    return ('', 204)#api
-
 # https://stackoverflow.com/questions/12232304/how-to-implement-server-push-in-flask-framework
 def accelerometer_stream_():
     global peluche
@@ -92,39 +86,14 @@ def air_quality_stream():
 def air_quality():
     return "{}\n\n".format(peluche.get_air_quality())
 
-@app.route('/play-sound', methods=['POST'])
+@app.route('/berceuse', methods=['POST'])
+#@app.route('/play-sound', methods=['POST'])
 def play_wav():
-    try:
-        import pyaudio
-    except ImportError:
-        print("Failed to import PyAudio, can't play sound.")
-        return ("Missing library to play sound.", 500)
-
-    from urllib import urlopen
-
-    # https://stackoverflow.com/questions/38171169/how-to-play-mp3-from-url
-    srate = 44100
-    if "rate" in request.get_json():
-        srate = request.get_json()["rate"]
-
-    pyaud = pyaudio.PyAudio()
-    stream = pyaud.open(format=pyaud.get_format_from_width(1),
-                        channels=1,
-                        rate=srate,
-                        output=True);
-
-    #url = "http://www.audiocheck.net/download.php?filename=Audio/audiocheck.net_hdchirp_88k_-3dBFS_lin.wav"
     url = request.get_json()["url"]
-    u = urlopen(url)
 
-    data = u.read(8192)
+    from subprocess import call
+    call(["omxplayer", url])
 
-    while data:
-        stream.write(data)
-        data = u.read(8192)
-    #    print("data")
-    #    print(request.data)
-    #    print("data")
     return ('', 200)
 
 def start_REST_server(_peluche):
