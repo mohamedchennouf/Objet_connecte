@@ -2,17 +2,19 @@ var ip = '192.168.1.158';
 var port = '7896';
 var precedentValue = "OFF";
 var cpt = 0;
+
 function SeuilNoise(bruit) { 
-    if(bruit >= 300) {
+    if(bruit >= 400) {
         cpt = 0;
         PostLight("ON")
         precedentValue = "ON"
     }else{
-        if(cpt > 20 ){
+        if(cpt === 20){
             PostLight("OFF");
         }
     }
     cpt ++;
+    
 }
 
 

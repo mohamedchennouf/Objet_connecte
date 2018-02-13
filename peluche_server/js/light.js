@@ -4,7 +4,7 @@ var ip = '192.168.1.158';
 var port = '7896';
 
 
-function PostLight() {
+function PostLight2() {
     if (status == "OFF")
         status = "ON";
     else
@@ -14,7 +14,7 @@ function PostLight() {
      $('#demo').html(data);
      });*/
     var http = new XMLHttpRequest();
-    var url = "http://"+ip+":"+port+"/light";
+    var url = "http://" + ip + ":" + port + "/light";
 
     var params = JSON.stringify({ status: status });
     http.open("POST", url, true);
@@ -23,7 +23,7 @@ function PostLight() {
     http.setRequestHeader("Content-type", "application/json");
 
     http.onreadystatechange = function () {//Call a function when the state changes.
-       document.getElementById("infoVeilleuse").innerHTML = status;
+        document.getElementById("infoVeilleuse").innerHTML = status;
         if (http.readyState == XMLHttpRequest.DONE && http.status == 200) {
             console.log(status);
         }
@@ -32,9 +32,9 @@ function PostLight() {
 }
 
 function PostLight(statusLight) {
-   
+
     var http = new XMLHttpRequest();
-    var url = "http://"+ip+":"+port+"/light";
+    var url = "http://" + ip + ":" + port + "/light";
 
     var params = JSON.stringify({ status: statusLight });
     http.open("POST", url, true);
@@ -43,11 +43,11 @@ function PostLight(statusLight) {
     http.setRequestHeader("Content-type", "application/json");
 
     http.onreadystatechange = function () {//Call a function when the state changes.
-       if(statusLight === "ON"){
-           document.getElementById("infoVeilleuse").innerHTML = statusLight;
-       }
+        if (statusLight === "ON") {
+            document.getElementById("infoVeilleuse").innerHTML = statusLight;
+        }
         if (http.readyState == XMLHttpRequest.DONE && http.status == 200) {
-            
+
         }
     };
     http.send(JSON.stringify({ status: statusLight }));
@@ -64,20 +64,25 @@ exports.hello = function(req, res) {
 */
 
 
-function displayTime(){
+function displayTime() {
     d = new Date();
     document.getElementById("time").innerHTML = d.toLocaleTimeString();
 }
 
+var allumer = false;
 
-function AllumeVeilleuse(time,duration){
+function AllumeVeilleuse(time, duration) {
     d = new Date();
-     if(time.hour===d.getHours() && time.minutes>=d.getMinutes() && d.getMinutes()<time.minutes + duration ){
-       document.getElementById("infoVeilleuse").innerHTML = 'La veilleuse est allume durant '+duration+' minutes';
-        if(time.hour===d.getHours() && time.minutes===d.getMinutes() && d.getSeconds()===0){
-            PostLight();
+    if (time.hour === d.getHours() && d.getMinutes() >= time.minutes && d.getMinutes() < time.minutes + duration) {
+        document.getElementById("infoVeilleuse").innerHTML = 'La veilleuse est allume durant ' + duration + ' minutes';
+        console.log("momo");
+        if (allumer === false) {
+            console.log("totototo")
+            allumer = true;
+            PostLight2();
         }
-     }else{
-         document.getElementById("infoVeilleuse").innerHTML = "La veilleuse s'allumera a "+time.hour +":"+time.minutes;
-     }
+    } else {
+        console.log(time);
+        document.getElementById("infoVeilleuse").innerHTML = "La veilleuse s'allumera a " + time.hour + ":" + time.minutes;
     }
+}
