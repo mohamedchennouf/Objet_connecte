@@ -9,7 +9,7 @@ function PostBerceuse() {
     var url = "http://"+ip+":"+port+"/berceuse";
     var uriBerceuse = 'http://www.brainybetty.com/FacebookFans/Feb112010/cello.wav';
 
-    var params = JSON.stringify({ apiBerceuse : uriBerceuse });
+    var params = JSON.stringify({ url : uriBerceuse , rate : 176375});
     http.open("POST", url, true);
 
     //Send the proper header information along with the request

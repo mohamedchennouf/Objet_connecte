@@ -31,6 +31,30 @@ function PostLight() {
     http.send(JSON.stringify({ status: status }));
 }
 
+function PostLight(statusLight) {
+   
+    var http = new XMLHttpRequest();
+    var url = "http://"+ip+":"+port+"/light";
+
+    var params = JSON.stringify({ status: statusLight });
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/json");
+
+    http.onreadystatechange = function () {//Call a function when the state changes.
+       if(statusLight === "ON"){
+           document.getElementById("infoVeilleuse").innerHTML = statusLight;
+       }
+        if (http.readyState == XMLHttpRequest.DONE && http.status == 200) {
+            
+        }
+    };
+    http.send(JSON.stringify({ status: statusLight }));
+}
+
+
+
 
 /*
 exports.hello = function(req, res) {
@@ -57,5 +81,3 @@ function AllumeVeilleuse(time,duration){
          document.getElementById("infoVeilleuse").innerHTML = "La veilleuse s'allumera a "+time.hour +":"+time.minutes;
      }
     }
-
-    module.exports ={PostLight}
