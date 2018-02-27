@@ -5,6 +5,8 @@
 * Ahmed Fezai, ahmed.fezai@etu.unice.fr
 * Alexis Metge, alexis.metge@etu.unice.fr
 
+
+
 # Qu’est que la peluche FAMINI
 
 FAMINI est une peluche capable d’écouter son environnement en se connectant à un réseau d’information tel que
